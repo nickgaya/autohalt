@@ -1,4 +1,4 @@
-# AutoPause
+# AutoHalt
 
 A Firefox web extension to turn off autoplaying of suggested videos.
 
