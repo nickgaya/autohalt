@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "AutoPause",
-  "version": "0.1",
+  "version": "0.2",
 
   "author": "Nicholas Gaya",
   "description": "Turns off autoplay by default on supported websites.",
@@ -11,10 +11,22 @@
     "96": "icons/autopause.svg"
   },
 
+  "permissions": [
+    "tabs"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],
       "js": ["content_scripts/youtube.js"]
+    },
+    {
+      "matches": ["https://gfycat.com/*", "https://redgifs.com/*"],
+      "js": ["content_scripts/gfycat.js"]
     }
   ]
 }

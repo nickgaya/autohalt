@@ -15,3 +15,6 @@ This list may be extended in future versions.
 * **YouTube**: Turns the "Autoplay" switch to off. The user can manually
   re-enable autoplay by clicking the switch again. If viewing a playlist or
   queue, videos will play automatically until the end of the list.
+
+* **Gfycat**: Turns the "Autoplay Related GIFs" switch to off. The user can
+  manually re-enable autoplay by clicking the switch again.
