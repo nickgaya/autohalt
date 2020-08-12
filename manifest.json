@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
   "name": "AutoPause",
-  "version": "0.2",
+  "version": "0.3",
 
   "author": "Nicholas Gaya",
-  "description": "Turns off autoplay by default on supported websites.",
+  "description": "Turns off autoplaying of suggested videos on supported websites.",
 
   "icons": {
     "48": "icons/autopause.svg",
@@ -27,6 +27,10 @@
     {
       "matches": ["https://gfycat.com/*", "https://redgifs.com/*"],
       "js": ["content_scripts/gfycat.js"]
+    },
+    {
+      "matches": ["https://www.twitch.tv/*"],
+      "js": ["content_scripts/twitch.js"]
     }
   ]
 }
