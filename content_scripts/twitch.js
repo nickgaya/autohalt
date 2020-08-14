@@ -9,7 +9,7 @@ function findAutoplayMoreSuggestionsButton() {
 }
 
 function disableAutoplay() {
-    var moreSuggestionsButton = findAutoplayMoreSuggestionsButton();
+    const moreSuggestionsButton = findAutoplayMoreSuggestionsButton();
     if (!moreSuggestionsButton) {
         // console.debug("Autoplay More Suggestions button not found");
         return false;
@@ -25,27 +25,41 @@ function disableAutoplay() {
 //
 // We could make this more efficient by only watching for changes to a parent
 // element rather than the entire page. Not sure if this is worthwhile.
+function monitorDom() {
+    let scheduled = false;
 
-var scheduled = false;
-
-function idleCallback() {
-    disableAutoplay();
-    scheduled = false;
-}
-
-function scheduleIdleCallback() {
-    if (!scheduled) {
-        window.requestIdleCallback(idleCallback, {timeout: 1000});
-        scheduled = true;
+    function idleCallback() {
+        disableAutoplay();
+        scheduled = false;
     }
+
+    function scheduleIdleCallback() {
+        if (!scheduled) {
+            window.requestIdleCallback(idleCallback, {timeout: 1000});
+            scheduled = true;
+        }
+    }
+
+    const observer = new MutationObserver(scheduleIdleCallback);
+
+    const observerConfig = {
+        subtree: true,
+        childList: true,
+    };
+    observer.observe(document.body, observerConfig);
+
+    scheduleIdleCallback();
 }
 
-const observer = new MutationObserver(scheduleIdleCallback);
-
-const observerConfig = {
-    subtree: true,
-    childList: true,
-};
-observer.observe(document.body, observerConfig);
-
-scheduleIdleCallback();
+browser.storage.local.get('twitch')
+.then((settings) => {
+    return !settings.twitch?.disabled;
+}, (error) => {
+    console.warn("Failed to get settings:", error);
+    return true;
+})
+.then((enabled) => {
+    if (enabled) {
+        monitorDom();
+    }
+});

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "AutoHalt",
-  "version": "0.4",
+  "version": "0.5",
 
   "author": "Nicholas Gaya",
   "description": "Turns off autoplaying of suggested videos on supported websites.",
@@ -9,6 +9,14 @@
   "icons": {
     "48": "icons/autohalt.svg",
     "96": "icons/autohalt.svg"
+  },
+
+  "permissions": [
+    "storage"
+  ],
+
+  "options_ui": {
+    "page": "settings/settings.html"
   },
 
   "content_scripts": [

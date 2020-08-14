@@ -9,7 +9,7 @@ function findAutoplayCheckbox() {
 }
 
 function disableAutoplay() {
-    var autoplayCheckbox = findAutoplayCheckbox();
+    const autoplayCheckbox = findAutoplayCheckbox();
     if (!autoplayCheckbox) {
         // console.debug("Autoplay checkbox not found");
         return false;
@@ -34,27 +34,40 @@ function disableAutoplay() {
 // We could potentially stop watching after finding the element and start again
 // when the location changes, however this requires a background script to
 // watch for tab events.
+function monitorDom() {
+    let scheduled = false;
 
-var scheduled = false;
-
-function idleCallback() {
-    disableAutoplay();
-    scheduled = false;
-}
-
-function scheduleIdleCallback() {
-    if (!scheduled) {
-        window.requestIdleCallback(idleCallback, {timeout: 1000});
-        scheduled = true;
+    function idleCallback() {
+        disableAutoplay();
+        scheduled = false;
     }
+
+    function scheduleIdleCallback() {
+        if (!scheduled) {
+            window.requestIdleCallback(idleCallback, {timeout: 1000});
+            scheduled = true;
+        }
+    }
+
+    const observer = new MutationObserver(scheduleIdleCallback);
+    const observerConfig = {
+        subtree: true,
+        childList: true,
+    };
+    observer.observe(document.body, observerConfig);
+
+    scheduleIdleCallback();
 }
 
-const observer = new MutationObserver(scheduleIdleCallback);
-
-const observerConfig = {
-    subtree: true,
-    childList: true,
-};
-observer.observe(document.body, observerConfig);
-
-scheduleIdleCallback();
+browser.storage.local.get('gfycat')
+.then((settings) => {
+    return !settings.gfycat?.disabled;
+}, (error) => {
+    console.warn("Failed to get settings:", error);
+    return true;
+})
+.then((enabled) => {
+    if (enabled) {
+        monitorDom();
+    }
+});

@@ -4,7 +4,7 @@ function findAutoplayButton() {
 }
 
 function disableAutoplay() {
-    var autoplayButton = findAutoplayButton();
+    const autoplayButton = findAutoplayButton();
     if (!autoplayButton) {
         // console.debug("Autoplay button not found");
         return false;
@@ -22,30 +22,43 @@ function disableAutoplay() {
 // YouTube is relatively user-friendly in that it respects the user's autoplay
 // setting across the browser session, so we can stop listening for mutation
 // events once the button is detected and toggled.
+function monitorDom() {
+    let scheduled = false;
 
-var scheduled = false;
-
-function idleCallback() {
-    if (disableAutoplay()) {
-        // console.debug("Disconnecting MutationObserver");
-        observer.disconnect();
+    function idleCallback() {
+        if (disableAutoplay()) {
+            // console.debug("Disconnecting MutationObserver");
+            observer.disconnect();
+        }
+        scheduled = false;
     }
-    scheduled = false;
+
+    function scheduleIdleCallback() {
+        if (!scheduled) {
+            window.requestIdleCallback(idleCallback, {timeout: 1000});
+            scheduled = true;
+        }
+    }
+
+    const observer = new MutationObserver(scheduleIdleCallback);
+    const observerConfig = {
+        subtree: true,
+        childList: true,
+    };
+    observer.observe(document.body, observerConfig);
+
+    scheduleIdleCallback();
 }
 
-function scheduleIdleCallback() {
-    if (!scheduled) {
-        window.requestIdleCallback(idleCallback, {timeout: 1000});
-        scheduled = true;
+browser.storage.local.get('youtube')
+.then((settings) => {
+    return !settings.youtube?.disabled;
+}, (error) => {
+    console.warn("Failed to get settings:", error);
+    return true;
+})
+.then((enabled) => {
+    if (enabled) {
+        monitorDom();
     }
-}
-
-const observer = new MutationObserver(scheduleIdleCallback);
-
-const observerConfig = {
-    subtree: true,
-    childList: true,
-};
-observer.observe(document.body, observerConfig);
-
-scheduleIdleCallback();
+});
