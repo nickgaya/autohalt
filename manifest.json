@@ -11,21 +11,13 @@
     "96": "icons/autohalt.svg"
   },
 
-  "permissions": [
-    "tabs"
-  ],
-
-  "background": {
-    "scripts": ["background.js"]
-  },
-
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],
       "js": ["content_scripts/youtube.js"]
     },
     {
-      "matches": ["https://gfycat.com/*", "https://redgifs.com/*"],
+      "matches": ["https://gfycat.com/*", "https://www.redgifs.com/*"],
       "js": ["content_scripts/gfycat.js"]
     },
     {

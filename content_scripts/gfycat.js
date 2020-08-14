@@ -1,44 +1,60 @@
 var userEnabled = null;
 function checkboxListener(event) {
     userEnabled = event.target.checked;
-    // console.log("Autoplay checkbox changed: ", userEnabled);
+    // console.debug("Autoplay checkbox changed:", userEnabled);
+}
+
+function findAutoplayCheckbox() {
+    return document.querySelector('.upnext-control input[type=checkbox]');
 }
 
 function disableAutoplay() {
-    var upNextDiv = document.getElementsByClassName('upnext-control')[0];
-    if (!upNextDiv) {
-        console.log("Up Next div not found");
-        return false;
-    }
-
-    var autoplayCheckbox = upNextDiv.querySelector(
-        '.switch input[type=checkbox]');
+    var autoplayCheckbox = findAutoplayCheckbox();
     if (!autoplayCheckbox) {
-        // console.log("Autoplay checkbox not found");
+        // console.debug("Autoplay checkbox not found");
         return false;
     }
+    // console.debug("Found autoplay checkbox:", autoplayCheckbox);
 
-    var checked = autoplayCheckbox.checked;
-    console.log("Autoplay checkbox checked: ", checked);
-    if (checked && !userEnabled) {
+    if (autoplayCheckbox.checked && !userEnabled) {
+        console.info("Clicking autoplay checkbox");
         autoplayCheckbox.click();
-        console.log("Autoplay checkbox checked after click: ",
-                    autoplayCheckbox.checked);
     }
 
-    // Listen and remember if the user manually enables autoplay in this tab
+    // Listen and remember if the user manually enables autoplay
     autoplayCheckbox.addEventListener('change', checkboxListener);
 
     return true;
 }
 
-disableAutoplay();
+// Watch for DOM changes until the autoplay checkbox appears. Gfycat does not
+// preserve the user's selection if they navigate away from the video player,
+// so we keep watching the DOM even after disabling autoplay.
+//
+// We could potentially stop watching after finding the element and start again
+// when the location changes, however this requires a background script to
+// watch for tab events.
 
-// Gfycat re-enables autoplay if the user navigates away from the video player
-// view and later returns. We use a background script to listen for url changes
-// and re-disable autoplay if the user hasn't manually enabled it.
-browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.message === 'urlChanged') {
-        disableAutoplay();
+var scheduled = false;
+
+function idleCallback() {
+    disableAutoplay();
+    scheduled = false;
+}
+
+function scheduleIdleCallback() {
+    if (!scheduled) {
+        window.requestIdleCallback(idleCallback, {timeout: 1000});
+        scheduled = true;
     }
-});
+}
+
+const observer = new MutationObserver(scheduleIdleCallback);
+
+const observerConfig = {
+    subtree: true,
+    childList: true,
+};
+observer.observe(document.body, observerConfig);
+
+scheduleIdleCallback();
