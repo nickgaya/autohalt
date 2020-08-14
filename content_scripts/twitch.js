@@ -1,50 +1,51 @@
-// Twitch has the worst autoplay feature I've seen so far. There is no way for
-// the user to switch off the feature. See:
+// Twitch does not provide a user toggle for autoplay functionality. See:
 // https://twitch.uservoice.com/forums/923368/suggestions/18396028
 //
 // As a workaround we watch for the autoplay card to appear in the DOM and,
 // when it does, click "More Suggestions" to disable the countdown.
 
+function findAutoplayMoreSuggestionsButton() {
+    return document.querySelector('.autoplay-vod__content-container button');
+}
+
 function disableAutoplay() {
-    var autoplayDiv = document.getElementsByClassName(
-        'autoplay-vod__content-container')[0];
-    if (!autoplayDiv) {
-        // console.log("Autoplay div not found");
-        return false;
-    }
-
-    // XXX: This is pretty fragile, is there a more robust way?
-    var moreSuggestionsButton = autoplayDiv.getElementsByTagName('button')[0];
+    var moreSuggestionsButton = findAutoplayMoreSuggestionsButton();
     if (!moreSuggestionsButton) {
-        // console.log("More Suggestions button not found");
+        // console.debug("Autoplay More Suggestions button not found");
         return false;
     }
 
-    console.log("Clicking More Suggestions button");
+    console.info("Clicking More Suggestions button");
     moreSuggestionsButton.click();
     return true;
 }
 
-// TODO: Throttle callback rate?
+// When the DOM changes, try to find the autoplay card and delete it if
+// applicable.
+//
+// We could make this more efficient by only watching for changes to a parent
+// element rather than the entire page. Not sure if this is worthwhile.
 
 var scheduled = false;
 
-const idleCallback = function() {
+function idleCallback() {
     disableAutoplay();
     scheduled = false;
-};
+}
 
-const observerCallback = function(mutationsList, observer) {
+function scheduleIdleCallback() {
     if (!scheduled) {
         window.requestIdleCallback(idleCallback, {timeout: 1000});
         scheduled = true;
     }
-};
+}
 
-const observer = new MutationObserver(observerCallback);
+const observer = new MutationObserver(scheduleIdleCallback);
 
 const observerConfig = {
     subtree: true,
     childList: true,
 };
 observer.observe(document.body, observerConfig);
+
+scheduleIdleCallback();
