@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "AutoHalt",
-  "version": "0.5",
+  "version": "0.6",
 
   "author": "Nicholas Gaya",
   "description": "Turns off autoplaying of suggested videos on supported websites.",
@@ -22,15 +22,24 @@
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],
-      "js": ["content_scripts/youtube.js"]
+      "js": [
+        "content_scripts/autohalt-common.js",
+        "content_scripts/autohalt-youtube.js"
+      ]
     },
     {
       "matches": ["https://gfycat.com/*", "https://www.redgifs.com/*"],
-      "js": ["content_scripts/gfycat.js"]
+      "js": [
+        "content_scripts/autohalt-common.js",
+        "content_scripts/autohalt-gfycat.js"
+      ]
     },
     {
       "matches": ["https://www.twitch.tv/*"],
-      "js": ["content_scripts/twitch.js"]
+      "js": [
+        "content_scripts/autohalt-common.js",
+        "content_scripts/autohalt-twitch.js"
+      ]
     }
   ]
 }

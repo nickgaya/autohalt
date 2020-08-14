@@ -23,8 +23,7 @@ function disableAutoplay() {
 // When the DOM changes, try to find the autoplay card and delete it if
 // applicable.
 //
-// We could make this more efficient by only watching for changes to a parent
-// element rather than the entire page. Not sure if this is worthwhile.
+
 function monitorDom() {
     let scheduled = false;
 
@@ -60,6 +59,6 @@ browser.storage.local.get('twitch')
 })
 .then((enabled) => {
     if (enabled) {
-        monitorDom();
+        monitorDom(disableAutoplay);
     }
 });

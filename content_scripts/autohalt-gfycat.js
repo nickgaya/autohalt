@@ -27,38 +27,6 @@ function disableAutoplay() {
     return true;
 }
 
-// Watch for DOM changes until the autoplay checkbox appears. Gfycat does not
-// preserve the user's selection if they navigate away from the video player,
-// so we keep watching the DOM even after disabling autoplay.
-//
-// We could potentially stop watching after finding the element and start again
-// when the location changes, however this requires a background script to
-// watch for tab events.
-function monitorDom() {
-    let scheduled = false;
-
-    function idleCallback() {
-        disableAutoplay();
-        scheduled = false;
-    }
-
-    function scheduleIdleCallback() {
-        if (!scheduled) {
-            window.requestIdleCallback(idleCallback, {timeout: 1000});
-            scheduled = true;
-        }
-    }
-
-    const observer = new MutationObserver(scheduleIdleCallback);
-    const observerConfig = {
-        subtree: true,
-        childList: true,
-    };
-    observer.observe(document.body, observerConfig);
-
-    scheduleIdleCallback();
-}
-
 browser.storage.local.get('gfycat')
 .then((settings) => {
     return !settings.gfycat?.disabled;
@@ -68,6 +36,9 @@ browser.storage.local.get('gfycat')
 })
 .then((enabled) => {
     if (enabled) {
-        monitorDom();
+        // Gfycat does not preserve the state of the autoplay toggle if the
+        // user navigates away from the video player, so keep watching the DOM
+        // indefinitely.
+        monitorDom(disableAutoplay);
     }
 });
