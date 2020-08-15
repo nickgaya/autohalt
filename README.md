@@ -1,6 +1,7 @@
 # AutoHalt
 
-A web extension to turn off autoplaying of suggested videos.
+A web extension to turn off autoplaying of suggested content on YouTube and
+other sites.
 
 Some websites with media content have an "autoplay next" feature to
 automatically begin playing related content after the end of the content the
@@ -14,8 +15,8 @@ does not modify the page's structure or content.
 
 ## Supported websites
 
-AutoHalt only works on the websites listed below. This list may be extended in
-future versions.
+AutoHalt currently only supports the websites listed below. This list may be
+expanded in future versions.
 
 * **YouTube**: Turns the "Autoplay" switch to off. The user can manually
   re-enable autoplay by clicking the switch again. If viewing a playlist or

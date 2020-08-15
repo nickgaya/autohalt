@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.0
+
+- Finalize manifest for submission to addons.mozilla.org
+
 ## Version 0.6
 
 - Factor common code into common js file
