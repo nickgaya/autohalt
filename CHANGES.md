@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.1
+
+- Add Chrome support
+
 ## Version 1.0
 
 - Finalize manifest for submission to addons.mozilla.org

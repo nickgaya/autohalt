@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "AutoHalt",
-  "version": "1.0",
+  "version": "1.1",
 
   "author": "Nicholas Gaya",
   "description": "Turn off autoplaying of suggested content on YouTube, Gfycat, and Twitch.",
@@ -24,26 +24,34 @@
   ],
 
   "options_ui": {
-    "page": "settings/settings.html"
+    "page": "settings/settings.html",
+    "open_in_tab": false
   },
 
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*"],
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
       "js": [
         "content_scripts/autohalt-common.js",
         "content_scripts/autohalt-youtube.js"
       ]
     },
     {
-      "matches": ["https://gfycat.com/*", "https://www.redgifs.com/*"],
+      "matches": [
+        "https://gfycat.com/*",
+        "https://www.redgifs.com/*"
+      ],
       "js": [
         "content_scripts/autohalt-common.js",
         "content_scripts/autohalt-gfycat.js"
       ]
     },
     {
-      "matches": ["https://www.twitch.tv/*"],
+      "matches": [
+        "https://www.twitch.tv/*"
+      ],
       "js": [
         "content_scripts/autohalt-common.js",
         "content_scripts/autohalt-twitch.js"
