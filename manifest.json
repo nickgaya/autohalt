@@ -5,7 +5,7 @@
   "version": "1.0",
 
   "author": "Nicholas Gaya",
-  "description": "Turns off autoplaying of suggested videos on supported websites.",
+  "description": "Turn off autoplaying of suggested content on YouTube, Gfycat, and Twitch.",
   "homepage_url": "https://github.com/nickgaya/autohalt",
 
   "browser_specific_settings": {
