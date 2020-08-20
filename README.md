@@ -38,3 +38,4 @@ in future versions.
 ## Installation
 
 * Firefox: https://addons.mozilla.org/addon/autohalt/
+* Chrome: https://chrome.google.com/webstore/detail/poeongpiodnpekilfkddijomoiinbcco
