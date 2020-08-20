@@ -1,3 +1,14 @@
+function getSiteSettings(key) {
+    return browser.storage.local.get(key)
+    .then((settings) => {
+        return settings[key];
+    })
+    .catch((error) => {
+        console.warn("Failed to get settings for", key, ":", error);
+        return {};
+    });
+}
+
 function monitorDom(disableAutoplay, options) {
     const disconnectOnSuccess = !!options?.disconnectOnSuccess;
 

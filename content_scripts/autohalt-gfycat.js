@@ -27,18 +27,15 @@ function disableAutoplay() {
     return true;
 }
 
-browser.storage.local.get('gfycat')
+getSiteSettings('gfycat')
 .then((settings) => {
-    return !settings.gfycat?.disabled;
-}, (error) => {
-    console.warn("Failed to get settings:", error);
-    return true;
-})
-.then((enabled) => {
-    if (enabled) {
+    if (! settings?.disabled) {
         // Gfycat does not preserve the state of the autoplay toggle if the
         // user navigates away from the video player, so keep watching the DOM
         // indefinitely.
         monitorDom(disableAutoplay);
     }
+})
+.catch((error) => {
+    console.error(error);
 });

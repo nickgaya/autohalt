@@ -20,45 +20,14 @@ function disableAutoplay() {
     return true;
 }
 
-// When the DOM changes, try to find the autoplay card and delete it if
-// applicable.
-//
-
-function monitorDom() {
-    let scheduled = false;
-
-    function idleCallback() {
-        disableAutoplay();
-        scheduled = false;
-    }
-
-    function scheduleIdleCallback() {
-        if (!scheduled) {
-            window.requestIdleCallback(idleCallback, {timeout: 1000});
-            scheduled = true;
-        }
-    }
-
-    const observer = new MutationObserver(scheduleIdleCallback);
-
-    const observerConfig = {
-        subtree: true,
-        childList: true,
-    };
-    observer.observe(document.body, observerConfig);
-
-    scheduleIdleCallback();
-}
-
-browser.storage.local.get('twitch')
+getSiteSettings('twitch')
 .then((settings) => {
-    return !settings.twitch?.disabled;
-}, (error) => {
-    console.warn("Failed to get settings:", error);
-    return true;
-})
-.then((enabled) => {
-    if (enabled) {
+    if (! settings?.disabled) {
+        // When the DOM changes, try to find the autoplay card and click the
+        // "More Suggestions" button if applicable.
         monitorDom(disableAutoplay);
     }
+})
+.catch((error) => {
+    console.error(error);
 });

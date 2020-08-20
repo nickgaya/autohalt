@@ -18,18 +18,15 @@ function disableAutoplay() {
     return true;
 }
 
-browser.storage.local.get('youtube')
+getSiteSettings('youtube')
 .then((settings) => {
-    return !settings.youtube?.disabled;
-}, (error) => {
-    console.warn("Failed to get settings:", error);
-    return true;
-})
-.then((enabled) => {
-    if (enabled) {
+    if (! settings?.disabled) {
         // YouTube remembers the user's autoplay selection across the browser
-        // session, so we can stop listening for mutation events once the
-        // autoplay button is detected and toggled once.
+        // session, so we can stop listening for mutation events once we find
+        // the autoplay button and click it once if needed.
         monitorDom(disableAutoplay, {disconnectOnSuccess: true});
     }
+})
+.catch((error) => {
+    console.error(error);
 });

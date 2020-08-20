@@ -3,6 +3,7 @@
 ## Version 1.1
 
 - Add Chrome support
+- Factor more common code into common js file
 
 ## Version 1.0
 
