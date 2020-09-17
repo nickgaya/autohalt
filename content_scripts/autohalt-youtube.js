@@ -18,15 +18,7 @@ function disableAutoplay() {
     return true;
 }
 
-getSiteSettings('youtube')
-.then((settings) => {
-    if (! settings?.disabled) {
-        // YouTube remembers the user's autoplay selection across the browser
-        // session, so we can stop listening for mutation events once we find
-        // the autoplay button and click it once if needed.
-        monitorDom(disableAutoplay, {disconnectOnSuccess: true});
-    }
-})
-.catch((error) => {
-    console.error(error);
-});
+// YouTube remembers the user's autoplay selection as they navigate around, so
+// we can stop listening for mutation events as soon as the up next toggle
+// appears.
+setupAutoHalt('youtube', disableAutoplay, {disconnectOnSuccess: true});

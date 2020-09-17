@@ -27,12 +27,4 @@ function disableAutoplay() {
     return true;
 }
 
-getSiteSettings('facebook')
-.then((settings) => {
-    if (! settings?.disabled) {
-        monitorDom(disableAutoplay);
-    }
-})
-.catch((error) => {
-    console.error(error);
-});
+setupAutoHalt('facebook', disableAutoplay);

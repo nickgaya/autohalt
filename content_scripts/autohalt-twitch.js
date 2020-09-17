@@ -20,14 +20,4 @@ function disableAutoplay() {
     return true;
 }
 
-getSiteSettings('twitch')
-.then((settings) => {
-    if (! settings?.disabled) {
-        // When the DOM changes, try to find the autoplay card and click the
-        // "More Suggestions" button if applicable.
-        monitorDom(disableAutoplay);
-    }
-})
-.catch((error) => {
-    console.error(error);
-});
+setupAutoHalt('twitch', disableAutoplay);

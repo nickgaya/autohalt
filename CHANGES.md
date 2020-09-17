@@ -4,6 +4,7 @@
 - Add support for Facebook "Up Next" videos
 - More robust content script match patterns in manifest
 - Drop support for RedGIFs
+- Remove settings page when building for Chrome
 
 ## Version 1.1
 

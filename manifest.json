@@ -34,7 +34,7 @@
         "*://*.youtube.com/*"
       ],
       "js": [
-        "content_scripts/autohalt-common.js",
+        "content_scripts/autohalt.js",
         "content_scripts/autohalt-youtube.js"
       ]
     },
@@ -43,7 +43,7 @@
         "*://*.facebook.com/*"
       ],
       "js": [
-        "content_scripts/autohalt-common.js",
+        "content_scripts/autohalt.js",
         "content_scripts/autohalt-facebook.js"
       ]
     },
@@ -52,7 +52,7 @@
         "*://*.twitch.tv/*"
       ],
       "js": [
-        "content_scripts/autohalt-common.js",
+        "content_scripts/autohalt.js",
         "content_scripts/autohalt-twitch.js"
       ]
     },
@@ -61,7 +61,7 @@
         "*://*.gfycat.com/*"
       ],
       "js": [
-        "content_scripts/autohalt-common.js",
+        "content_scripts/autohalt.js",
         "content_scripts/autohalt-gfycat.js"
       ]
     }
