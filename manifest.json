@@ -31,7 +31,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.youtube.com/*"
+        "*://*.youtube.com/*"
       ],
       "js": [
         "content_scripts/autohalt-common.js",
@@ -49,7 +49,7 @@
     },
     {
       "matches": [
-        "https://www.twitch.tv/*"
+        "*://*.twitch.tv/*"
       ],
       "js": [
         "content_scripts/autohalt-common.js",
@@ -58,8 +58,7 @@
     },
     {
       "matches": [
-        "https://gfycat.com/*",
-        "https://www.redgifs.com/*"
+        "*://*.gfycat.com/*"
       ],
       "js": [
         "content_scripts/autohalt-common.js",

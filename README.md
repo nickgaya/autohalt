@@ -35,8 +35,7 @@ in future versions.
   clicking the "More Suggestions" button.
 
 * **Gfycat**: Turns the "Autoplay Related GIFs" switch to off. The user can
-  manually re-enable autoplay by clicking the switch again. (Also works on
-  RedGIFs, Gfycat's site for adult content.)
+  manually re-enable autoplay by clicking the switch again.
 
 ## Installation
 

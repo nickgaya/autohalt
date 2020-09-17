@@ -2,6 +2,8 @@
 
 ## Version 1.2
 - Add support for Facebook "Up Next" videos
+- More robust content script match patterns in manifest
+- Drop support for RedGIFs
 
 ## Version 1.1
 
