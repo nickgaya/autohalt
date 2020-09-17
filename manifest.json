@@ -2,10 +2,10 @@
   "manifest_version": 2,
 
   "name": "AutoHalt",
-  "version": "1.1",
+  "version": "1.2",
 
   "author": "Nicholas Gaya",
-  "description": "Turn off autoplaying of suggested content on YouTube, Gfycat, and Twitch.",
+  "description": "Turn off autoplaying of suggested content on YouTube, Facebook, Twitch, and Gfycat.",
   "homepage_url": "https://github.com/nickgaya/autohalt",
 
   "browser_specific_settings": {
@@ -40,12 +40,11 @@
     },
     {
       "matches": [
-        "https://gfycat.com/*",
-        "https://www.redgifs.com/*"
+        "*://*.facebook.com/*"
       ],
       "js": [
         "content_scripts/autohalt-common.js",
-        "content_scripts/autohalt-gfycat.js"
+        "content_scripts/autohalt-facebook.js"
       ]
     },
     {
@@ -55,6 +54,16 @@
       "js": [
         "content_scripts/autohalt-common.js",
         "content_scripts/autohalt-twitch.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://gfycat.com/*",
+        "https://www.redgifs.com/*"
+      ],
+      "js": [
+        "content_scripts/autohalt-common.js",
+        "content_scripts/autohalt-gfycat.js"
       ]
     }
   ]

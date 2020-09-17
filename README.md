@@ -1,7 +1,7 @@
 # AutoHalt
 
 A web extension to turn off autoplaying of suggested content on YouTube,
-Gfycat, and Twitch.
+Facebook, Twitch, and Gfycat.
 
 ## Overview
 
@@ -28,14 +28,17 @@ in future versions.
   re-enable autoplay by clicking the switch again. If viewing a playlist or
   queue, videos will play automatically until the end of the list.
 
-* **Gfycat**: Turns the "Autoplay Related GIFs" switch to off. The user can
-  manually re-enable autoplay by clicking the switch again. (Also works on
-  RedGIFs, Gfycat's site for adult content.)
+* **Facebook**: Clicks the "Cancel" button on the "Up Next" prompt at the end
+  of a video.
 
 * **Twitch**: When viewing VODs, prevents the next video from autoplaying by
   clicking the "More Suggestions" button.
 
+* **Gfycat**: Turns the "Autoplay Related GIFs" switch to off. The user can
+  manually re-enable autoplay by clicking the switch again. (Also works on
+  RedGIFs, Gfycat's site for adult content.)
+
 ## Installation
 
 * Firefox: https://addons.mozilla.org/addon/autohalt/
-* Chrome: https://chrome.google.com/webstore/detail/poeongpiodnpekilfkddijomoiinbcco
+* Chrome: https://chrome.google.com/webstore/detail/autohalt/poeongpiodnpekilfkddijomoiinbcco

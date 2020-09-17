@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 1.2
+- Add support for Facebook "Up Next" videos
+
 ## Version 1.1
 
 - Add Chrome support

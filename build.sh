@@ -15,6 +15,7 @@ set -o pipefail
 
 FILES=(
     content_scripts/autohalt-common.js
+    content_scripts/autohalt-facebook.js
     content_scripts/autohalt-gfycat.js
     content_scripts/autohalt-twitch.js
     content_scripts/autohalt-youtube.js
