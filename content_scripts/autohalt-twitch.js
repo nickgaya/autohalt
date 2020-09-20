@@ -9,15 +9,19 @@ function findAutoplayMoreSuggestionsButton() {
 }
 
 function disableAutoplay() {
+    const result = {found: false, clicked: false};
+
     const moreSuggestionsButton = findAutoplayMoreSuggestionsButton();
     if (!moreSuggestionsButton) {
-        // console.debug("Autoplay More Suggestions button not found");
-        return false;
+        return result;
     }
+    result.found = true;
 
     console.info("Clicking More Suggestions button");
     moreSuggestionsButton.click();
-    return true;
+    result.clicked = true;
+
+    return result;
 }
 
 setupAutoHalt('twitch', disableAutoplay);

@@ -1,7 +1,6 @@
 var userEnabled = null;
 function checkboxListener(event) {
     userEnabled = event.target.checked;
-    // console.debug("Autoplay checkbox changed:", userEnabled);
 }
 
 function findAutoplayCheckbox() {
@@ -9,22 +8,24 @@ function findAutoplayCheckbox() {
 }
 
 function disableAutoplay() {
+    const result = {found: false, clicked: false};
+
     const autoplayCheckbox = findAutoplayCheckbox();
     if (!autoplayCheckbox) {
-        // console.debug("Autoplay checkbox not found");
-        return false;
+        return result;
     }
-    // console.debug("Found autoplay checkbox:", autoplayCheckbox);
+    result.found = true;
 
     if (autoplayCheckbox.checked && !userEnabled) {
         console.info("Clicking autoplay checkbox");
         autoplayCheckbox.click();
+        result.clicked = true;
     }
 
     // Listen and remember if the user manually enables autoplay
     autoplayCheckbox.addEventListener('change', checkboxListener);
 
-    return true;
+    return result;
 }
 
 // Depending on browser settings Gfycat does not always preserve the state of

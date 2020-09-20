@@ -1,23 +1,41 @@
 const useSettings = true;
+const idleCallbackTimeout = 1000;
+const postClickDelay = 500;
 
 function setupAutoHalt(name, callback, options) {
     function monitorDom(callback, options) {
-        const disconnectOnSuccess = !!options?.disconnectOnSuccess;
+        const disconnectOnFound = !!options?.disconnectOnFound;
 
         let scheduled = false;
+        let delayed = false;
 
         function idleCallback() {
-            let result = callback();
-            if (result && disconnectOnSuccess) {
+            const result = callback();
+            if (disconnectOnFound && result.found) {
+                console.info("Disconnecting MutationObserver");
                 observer.disconnect();
+            } else if (result.clicked) {
+                delayed = true;
+                setTimeout(timeoutCallback, postClickDelay);
             }
             scheduled = false;
         }
 
+        function timeoutCallback() {
+            delayed = false;
+            if (scheduled) {
+                window.requestIdleCallback(
+                    idleCallback, {timeout: idleCallbackTimeout});
+            }
+        }
+
         function scheduleIdleCallback() {
             if (!scheduled) {
-                window.requestIdleCallback(idleCallback, {timeout: 1000});
                 scheduled = true;
+                if (!delayed) {
+                    window.requestIdleCallback(
+                        idleCallback, {timeout: idleCallbackTimeout});
+                }
             }
         }
 
@@ -26,6 +44,7 @@ function setupAutoHalt(name, callback, options) {
             subtree: true,
             childList: true,
         };
+        console.info("Starting MutationObserver");
         observer.observe(document.body, observerConfig);
 
         scheduleIdleCallback();
@@ -45,4 +64,4 @@ function setupAutoHalt(name, callback, options) {
     } else {
         monitorDom(callback, options);
     }
-};
+}

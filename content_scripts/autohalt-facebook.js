@@ -33,15 +33,19 @@ function findUpNextCancelButton() {
 }
 
 function disableAutoplay() {
+    const result = {found: false, clicked: false};
+
     const upNextCancelButton = findUpNextCancelButton();
     if (!upNextCancelButton) {
-        // console.debug("Up Next Cancel button not found");
-        return false;
+        return result;
     }
+    result.found = true;
 
     console.info("Clicking Cancel button");
     upNextCancelButton.click();
-    return true;
+    result.clicked = true;
+
+    return result;
 }
 
 setupAutoHalt('facebook', disableAutoplay);

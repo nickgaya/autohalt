@@ -5,6 +5,7 @@
 - More robust content script match patterns in manifest
 - Drop support for RedGIFs
 - Remove settings page when building for Chrome
+- Add post-click delay for mutation callback
 
 ## Version 1.1
 
