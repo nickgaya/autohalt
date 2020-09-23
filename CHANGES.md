@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 1.3
+- Add support for Hulu autoplay
+
 ## Version 1.2
 - Add support for Facebook "Up Next" videos
 - More robust content script match patterns in manifest

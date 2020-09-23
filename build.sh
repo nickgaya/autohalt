@@ -17,6 +17,7 @@ FILES=(
     content_scripts/autohalt.js
     content_scripts/autohalt-facebook.js
     content_scripts/autohalt-gfycat.js
+    content_scripts/autohalt-hulu.js
     content_scripts/autohalt-twitch.js
     content_scripts/autohalt-youtube.js
 )

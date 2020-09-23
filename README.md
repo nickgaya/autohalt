@@ -1,7 +1,7 @@
 # AutoHalt
 
 A web extension to turn off autoplaying of suggested content on YouTube,
-Facebook, Twitch, and Gfycat.
+Facebook, Hulu, and other sites.
 
 ## Overview
 
@@ -24,6 +24,9 @@ AutoHalt currently supports the following websites.
 
 * **Facebook**: Clicks the "Cancel" button on the "Up Next" prompt at the end
   of a video.
+
+* **Hulu**: Turns the "Autoplay" switch to off in the video player settings.
+  The user can manually re-enable autoplay by clicking the switch again.
 
 * **Twitch**: When viewing VODs, prevents the next video from autoplaying by
   clicking the "More Suggestions" button.

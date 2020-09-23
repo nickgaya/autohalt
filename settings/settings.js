@@ -1,4 +1,4 @@
-const keys = ['youtube', 'facebook', 'twitch', 'gfycat'];
+const keys = ['youtube', 'facebook', 'hulu', 'twitch', 'gfycat'];
 
 function checkboxChanged(event) {
     browser.storage.local.set({
