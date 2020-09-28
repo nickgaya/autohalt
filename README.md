@@ -41,3 +41,5 @@ extension preferences.
 
 * [Firefox AMO](https://addons.mozilla.org/addon/autohalt/)
 * [Chrome Web Store](https://chrome.google.com/webstore/detail/autohalt/poeongpiodnpekilfkddijomoiinbcco)
+
+Unsigned (.zip) and signed (.xpi, .crx) files for each version can also be directly downloaded from the GitHub [release page](https://github.com/nickgaya/autohalt/releases).
