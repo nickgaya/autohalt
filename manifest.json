@@ -49,20 +49,20 @@
     },
     {
       "matches": [
-        "*://*.twitch.tv/*"
-      ],
-      "js": [
-        "content_scripts/autohalt.js",
-        "content_scripts/autohalt-twitch.js"
-      ]
-    },
-    {
-      "matches": [
         "*://*.hulu.com/*"
       ],
       "js": [
         "content_scripts/autohalt.js",
         "content_scripts/autohalt-hulu.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "js": [
+        "content_scripts/autohalt.js",
+        "content_scripts/autohalt-twitch.js"
       ]
     },
     {
