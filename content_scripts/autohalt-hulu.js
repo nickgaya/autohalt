@@ -1,5 +1,3 @@
-const settingsClickDelay = 100;
-
 function findAutoplaySwitch() {
     return document.body.querySelector(
         '.controls__setting-panel .controls__setting-autoplay');
