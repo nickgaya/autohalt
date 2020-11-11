@@ -67,6 +67,15 @@
     },
     {
       "matches": [
+        "*://*.vimeo.com/*"
+      ],
+      "js": [
+        "content_scripts/autohalt.js",
+        "content_scripts/autohalt-vimeo.js"
+      ]
+    },
+    {
+      "matches": [
         "*://*.gfycat.com/*"
       ],
       "js": [

@@ -31,6 +31,9 @@ AutoHalt currently supports the following websites.
 * **Twitch**: When viewing VODs, prevents the next video from autoplaying by
   clicking the "More Suggestions" button.
 
+* **Vimeo**: Turns the "Autoplay next video" toggle to off. The user can
+  manually re-enable autoplay by clicking the toggle again.
+
 * **Gfycat**: Turns the "Autoplay Related GIFs" switch to off. The user can
   manually re-enable autoplay by clicking the switch again.
 

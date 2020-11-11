@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 1.4
+- Add support for Vimeo
+
 ## Version 1.3
 - Add support for Hulu autoplay
 
