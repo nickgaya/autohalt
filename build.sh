@@ -1,15 +1,5 @@
 #! /bin/bash
 
-download() {
-    local url="$1"
-    local dest="$2"
-    status=$(curl -s -o "${dest}" -w '%{http_code}' "${url}")
-    if [ "${status}" != 200 ]; then
-        echo "Failed to download ${url}: ${status}" >&1
-        return 1
-    fi
-}
-
 set -eu
 set -o pipefail
 
