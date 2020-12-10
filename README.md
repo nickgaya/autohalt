@@ -1,9 +1,10 @@
 # AutoHalt
 
+[![Firefox: Get the add-on](images/ff_badge.png)](https://addons.mozilla.org/addon/autohalt/)
+[![Available in the Chrome Web Store](images/cws_badge.png)](https://chrome.google.com/webstore/detail/autohalt/poeongpiodnpekilfkddijomoiinbcco)
+
 A web extension to turn off autoplaying of suggested content on YouTube,
 Facebook, Hulu, and other sites.
-
-## Overview
 
 Take back control of your media viewing experience! Prevent sites from
 automatically playing suggested content after the content that you have
@@ -39,10 +40,3 @@ AutoHalt currently supports the following websites.
 
 Functionality for each site can be enabled or disabled individually in the
 extension preferences.
-
-## Installation
-
-* [Firefox AMO](https://addons.mozilla.org/addon/autohalt/)
-* [Chrome Web Store](https://chrome.google.com/webstore/detail/autohalt/poeongpiodnpekilfkddijomoiinbcco)
-
-Unsigned (.zip) and signed (.xpi, .crx) files for each version can also be directly downloaded from the GitHub [release page](https://github.com/nickgaya/autohalt/releases).
