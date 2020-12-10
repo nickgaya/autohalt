@@ -1,20 +1,27 @@
 function findAutoplayButton() {
-    return document.querySelector(
+    let elt = document.body.querySelector('ytp-autonav-toggle-button');
+    if (elt) {
+        return [elt, elt.getAttribute('aria-checked') === 'true'];
+    }
+    elt = document.body.querySelector(
         'ytd-compact-autoplay-renderer paper-toggle-button');
+    if (elt) {
+        return [elt, elt.getAttribute('aria-pressed') === 'true'];
+    }
 }
 
 function disableAutoplay() {
     const result = {found: false, clicked: false};
 
-    const autoplayButton = findAutoplayButton();
-    if (!autoplayButton) {
+    const [element, enabled] = findAutoplayButton() || [];
+    if (!element) {
         return result;
     }
     result.found = true;
 
-    if (autoplayButton.getAttribute('aria-pressed') === 'true') {
+    if (enabled) {
         console.info("Clicking autoplay button");
-        autoplayButton.click();
+        element.click();
         result.clicked = true;
     }
 

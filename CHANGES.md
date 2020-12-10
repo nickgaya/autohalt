@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 1.5
+- Add new css selector for YouTube
+
 ## Version 1.4
 - Add support for Vimeo
 
