@@ -21,6 +21,9 @@ FF_FILES=(
 )
 CH_FILES=(
     "${FILES[@]}"
+    icons/autohalt-16.png
+    icons/autohalt-48.png
+    icons/autohalt-128.png
 )
 
 name="$(jq -r '.name|ascii_downcase' <manifest.json)"
@@ -49,14 +52,6 @@ jq -f chrome.jq <manifest.json >"${ch_build_dir}/manifest.json"
 CH_FILES+=(manifest.json)
 ## Update script configuration
 sed -i.bak 's/const useSettings = true;/const useSettings = false;/g' "${ch_build_dir}/content_scripts/autohalt.js"
-## Generate png icons
-mkdir "${ch_build_dir}/icons/"
-sizes="$(jq -r '.icons|keys[]' <"${ch_build_dir}/manifest.json")"
-for p in ${sizes}; do
-    convert -density 2400 -resize "${p}x${p}" -background none icons/autohalt.svg "${ch_build_dir}/icons/autohalt-${p}.png" &
-    CH_FILES+=("icons/autohalt-${p}.png")
-done
-wait
 ## Package
 (cd "${ch_build_dir}" && zip "${vname}-ch.zip" "${CH_FILES[@]}")
 mv -i "${ch_build_dir}/${vname}-ch.zip" "artifacts/${vname}-ch.zip"
