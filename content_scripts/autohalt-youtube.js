@@ -96,36 +96,36 @@ const autoplayTranslations = new Set([
     "reprodución automática",  // Galego
     "automatska reprodukcija",  // Hrvatski
     "ukuzidlalela ngokwayo",  // IsiZulu
-    "sjálfvirk spilun",  // Italiano
     "sjálfvirk spilun",  // Íslenska
+    "riproduzione automatica",  // Italiano
     "cheza kiotomatiki",  // Kiswahili
     "automātiskā atskaņošana",  // Latviešu valoda
     "automatinis paleidimas",  // Lietuvių
     "automatikus lejátszás",  // Magyar
     "autoplay",  // Nederlands
     "automatisk avspilling",  // Norsk
-    "avtoijro",  // Polski
-    "reprodução automática",  // Polski
+    "avtoijro",  // O‘zbek
+    "autoodtwarzanie",  // Polski
     "reprodução automática",  // Português
     "reprodução automática",  // Português (Brasil)
     "redare automată",  // Română
-    "luajtje automatike",  // Slovenčina
-    "samodejno predvajanje",  // Slovenčina
+    "luajtje automatike",  // Shqip
+    "automatické prehrávanie",  // Slovenčina
     "samodejno predvajanje",  // Slovenščina
     "autoplej",  // Srpski
     "automaattinen toisto",  // Suomi
     "automatisk uppspelning",  // Svenska
     "tự động phát",  // Tiếng Việt
     "otomatik oynat",  // Türkçe
-    "аўтапрайграванне",  // Română
-    "luajtje automatike",  // Български
-    "авто ойнотуу",  // Slovenčina
-    "samodejno predvajanje",  // Қазақ Тілі
-    "автоматска репродукција",  // Srpski
-    "automaattinen toisto",  // Монгол
-    "автовоспроизведение",  // Svenska
-    "tự động phát",  // Српски
-    "автоматичне відтворення",  // Türkçe
+    "аўтапрайграванне",  // Беларуская
+    "автоматично пускане",  // Български
+    "авто ойнотуу",  // Кыргызча
+    "автоматты ойнату",  // Қазақ Тілі
+    "автоматска репродукција",  // Македонски
+    "автоматаар тоглуулах",  // Монгол
+    "автовоспроизведение",  // Русский
+    "аутоплеј",  // Српски
+    "автоматичне відтворення",  // Українська
     "αυτόματη αναπαραγωγή",  // Ελληνικά
     "ինքնացուցադրում",  // Հայերեն
     "הפעלה אוטומטית",  // עברית
