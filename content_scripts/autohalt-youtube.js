@@ -1,3 +1,23 @@
+function getSettingsMenu() {
+    const menuElt = document.body.querySelector('.ytp-settings-menu');
+    if (!menuElt) {
+        return null;  // No menu element
+    }
+    // Check if the menu has at least one item
+    if (menuElt.querySelector('.ytp-menuitem')) {
+        return menuElt;  // Menu already initialized
+    }
+    const menuButton = document.body.querySelector('.ytp-settings-button');
+    if (!menuButton) {
+        return null;  // Couldn't find button for menu - unexpected
+    }
+    // Click the settings button to initialize the settings menu, then click
+    // again to hide it.
+    menuButton.click();
+    menuButton.click();
+    return menuElt;
+}
+
 function findAutoplayButton() {
     let elt;
     // Switch in player bottom controls
@@ -11,15 +31,19 @@ function findAutoplayButton() {
     if (elt) {
         return [elt, elt.getAttribute('aria-pressed') === 'true'];
     }
-    // Toggle in player settings menu. There's no obvious way to distinguish
-    // the autoplay switch from the other menu items, so we iterate over each
-    // one and check the label text against a set of words for "autoplay" in
-    // multiple languages.
-    for (elt of document.body.querySelectorAll(
-            '.ytp-settings-menu .ytp-menuitem[role="menuitemcheckbox"]')) {
-        const label = elt.querySelector('.ytp-menuitem-label').textContent;
-        if (autoplayTranslations.has(label.toLowerCase())) {
-            return [elt, elt.getAttribute('aria-checked') === 'true'];
+    // Toggle in player settings menu.
+    const settingsMenu = getSettingsMenu();
+    if (settingsMenu) {
+        // There's no obvious way to distinguish the autoplay switch from the
+        // other menu items, so we iterate over each one and check the label
+        // text against a set of words for "autoplay" in each language
+        // supported by YouTube.
+        for (elt of settingsMenu.querySelectorAll(
+                 '.ytp-menuitem[role="menuitemcheckbox"]')) {
+            const label = elt.querySelector('.ytp-menuitem-label').textContent;
+            if (autoplayTranslations.has(label.toLowerCase())) {
+                return [elt, elt.getAttribute('aria-checked') === 'true'];
+            }
         }
     }
 }
