@@ -1,21 +1,30 @@
-function getSettingsMenu() {
+function findAutoplayElementInSettingsMenu() {
     const menuElt = document.body.querySelector('.ytp-settings-menu');
     if (!menuElt) {
         return null;  // No menu element
     }
-    // Check if the menu has at least one item
-    if (menuElt.querySelector('.ytp-menuitem')) {
-        return menuElt;  // Menu already initialized
+    // Check if the menu needs to be initialized
+    if (!menuElt.querySelector('.ytp-menuitem')) {
+        // Click the settings button to initialize the settings menu, then
+        // click again to hide the menu.
+        const menuButton = document.body.querySelector('.ytp-settings-button');
+        if (!menuButton) {
+            return null;  // Couldn't find button for menu, unexpected
+        }
+        menuButton.click();
+        menuButton.click();
     }
-    const menuButton = document.body.querySelector('.ytp-settings-button');
-    if (!menuButton) {
-        return null;  // Couldn't find button for menu - unexpected
+    // There's no obvious way to distinguish the autoplay switch from the other
+    // menu items via CSS selectors, so we iterate over each one and check the
+    // label.
+    for (elt of menuElt.querySelectorAll(
+             '.ytp-menuitem[role="menuitemcheckbox"]')) {
+        const label = elt.querySelector('.ytp-menuitem-label').textContent;
+        if (autoplayTranslations.has(label.toLowerCase())) {
+            return elt;
+        }
     }
-    // Click the settings button to initialize the settings menu, then click
-    // again to hide it.
-    menuButton.click();
-    menuButton.click();
-    return menuElt;
+    return null;
 }
 
 function findAutoplayButton() {
@@ -32,19 +41,9 @@ function findAutoplayButton() {
         return [elt, elt.getAttribute('aria-pressed') === 'true'];
     }
     // Toggle in player settings menu.
-    const settingsMenu = getSettingsMenu();
-    if (settingsMenu) {
-        // There's no obvious way to distinguish the autoplay switch from the
-        // other menu items, so we iterate over each one and check the label
-        // text against a set of words for "autoplay" in each language
-        // supported by YouTube.
-        for (elt of settingsMenu.querySelectorAll(
-                 '.ytp-menuitem[role="menuitemcheckbox"]')) {
-            const label = elt.querySelector('.ytp-menuitem-label').textContent;
-            if (autoplayTranslations.has(label.toLowerCase())) {
-                return [elt, elt.getAttribute('aria-checked') === 'true'];
-            }
-        }
+    elt = findAutoplayElementInSettingsMenu();
+    if (elt) {
+        return [elt, elt.getAttribute('aria-checked') === 'true'];
     }
 }
 
@@ -72,6 +71,7 @@ function disableAutoplay() {
 // on if desired.
 setupAutoHalt('youtube', disableAutoplay, {disconnectOnFound: true});
 
+// Set of translations of the term "autoplay" for YouTube-supported languages
 const autoplayTranslations = new Set([
     "outospeel",  // Afrikaans
     "avto-oxutma",  // Azərbaycan
