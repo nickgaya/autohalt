@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "AutoHalt",
-  "version": "1.5",
+  "version": "1.6",
 
   "author": "Nicholas Gaya",
   "description": "Turn off autoplaying of suggested content on YouTube, Facebook, Hulu, and other sites.",
