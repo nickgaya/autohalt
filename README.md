@@ -23,6 +23,10 @@ AutoHalt currently supports the following websites.
   re-enable autoplay by clicking the switch again. If viewing a playlist or
   queue, videos will play automatically until the end of the list.
 
+  The extension also turns off the Autoplay switch on YouTube Music when
+  available. However in some cases, such as playing an individual song, the
+  site does not give the user an option to disable autoplay functionality.
+
 * **Facebook**: Clicks the "Cancel" button on the "Up Next" prompt at the end
   of a video.
 

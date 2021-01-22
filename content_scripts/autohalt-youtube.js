@@ -45,6 +45,11 @@ function findAutoplayButton() {
     if (elt) {
         return [elt, elt.getAttribute('aria-checked') === 'true'];
     }
+    // YouTube Music - switch in queue controls
+    elt = document.body.querySelector('paper-toggle-button#automix');
+    if (elt) {
+        return [elt, elt.getAttribute('aria-pressed') === 'true'];
+    }
 }
 
 function disableAutoplay() {

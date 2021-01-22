@@ -2,6 +2,7 @@
 
 ## Version 1.5
 - Add support for multiple YouTube interface variants
+- Add partial support for YouTube Music
 
 ## Version 1.4
 - Add support for Vimeo
