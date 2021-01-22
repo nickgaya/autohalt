@@ -8,12 +8,6 @@
   "description": "Turn off autoplaying of suggested content on YouTube, Facebook, Hulu, and other sites.",
   "homepage_url": "https://github.com/nickgaya/autohalt",
 
-  "browser_specific_settings": {
-    "gecko": {
-      "strict_min_version": "48.0"
-    }
-  },
-
   "icons": {
     "48": "icons/autohalt.svg",
     "96": "icons/autohalt.svg"
