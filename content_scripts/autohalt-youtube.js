@@ -19,8 +19,8 @@ function findAutoplayElementInSettingsMenu() {
     // label.
     for (elt of menuElt.querySelectorAll(
              '.ytp-menuitem[role="menuitemcheckbox"]')) {
-        const label = elt.querySelector('.ytp-menuitem-label').textContent;
-        if (autoplayTranslations.has(label.toLowerCase())) {
+        const label = elt.querySelector('.ytp-menuitem-label')?.textContent;
+        if (label && autoplayTranslations.has(label.toLowerCase())) {
             return elt;
         }
     }
