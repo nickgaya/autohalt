@@ -44,3 +44,11 @@ AutoHalt currently supports the following websites.
 
 Functionality for each site can be enabled or disabled individually in the
 extension preferences.
+
+## Maintenance
+
+AutoHalt uses "hand-crafted" selectors to interact with the sites listed above.
+Over time, this functionality may cease to work as websites change and update
+their interface design. If you notice that AutoHalt is not working on a
+supported website, please file a GitHub bug report with the URL where the issue
+was observed and any other relevant details.
