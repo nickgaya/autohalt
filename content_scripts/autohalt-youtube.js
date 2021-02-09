@@ -33,7 +33,7 @@ function findAutoplayButton() {
     // Switch in player bottom controls
     elt = document.body.querySelector('ytp-autonav-toggle-button')
           || document.body.querySelector('.ytp-autonav-toggle-button');
-    if (elt) {
+    if (elt && elt.offsetParent) {  // Must be visible for click to work
         return [elt, elt.getAttribute('aria-checked') === 'true',
                 'player controls'];
     }
