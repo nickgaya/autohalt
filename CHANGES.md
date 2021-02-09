@@ -2,6 +2,7 @@
 
 ## Version 1.5.1
 - Additional YouTube selector
+- Minor logging improvements in YouTube content script
 
 ## Version 1.5
 - Add support for multiple YouTube interface variants

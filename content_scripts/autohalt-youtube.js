@@ -11,6 +11,7 @@ function findAutoplayElementInSettingsMenu() {
         if (!menuButton) {
             return null;  // Couldn't find button for menu, unexpected
         }
+        console.info("Initializing player settings menu");
         menuButton.click();
         menuButton.click();
     }
@@ -33,37 +34,41 @@ function findAutoplayButton() {
     elt = document.body.querySelector('ytp-autonav-toggle-button')
           || document.body.querySelector('.ytp-autonav-toggle-button');
     if (elt) {
-        return [elt, elt.getAttribute('aria-checked') === 'true'];
+        return [elt, elt.getAttribute('aria-checked') === 'true',
+                'player controls'];
     }
     // "Up Next" card at top of suggested videos
     elt = document.body.querySelector(
         'ytd-compact-autoplay-renderer paper-toggle-button');
     if (elt) {
-        return [elt, elt.getAttribute('aria-pressed') === 'true'];
+        return [elt, elt.getAttribute('aria-pressed') === 'true',
+                'Up Next card'];
     }
     // Toggle in player settings menu.
     elt = findAutoplayElementInSettingsMenu();
     if (elt) {
-        return [elt, elt.getAttribute('aria-checked') === 'true'];
+        return [elt, elt.getAttribute('aria-checked') === 'true',
+                'player settings menu'];
     }
     // YouTube Music - switch in queue controls
     elt = document.body.querySelector('paper-toggle-button#automix');
     if (elt) {
-        return [elt, elt.getAttribute('aria-pressed') === 'true'];
+        return [elt, elt.getAttribute('aria-pressed') === 'true',
+                'YouTube Music queue controls'];
     }
 }
 
 function disableAutoplay() {
     const result = {found: false, clicked: false};
 
-    const [element, enabled] = findAutoplayButton() || [];
+    const [element, enabled, where] = findAutoplayButton() || [];
     if (!element) {
         return result;
     }
     result.found = true;
 
     if (enabled) {
-        console.info("Clicking autoplay switch");
+        console.info(`Clicking autoplay switch (${where})`);
         element.click();
         result.clicked = true;
     }
