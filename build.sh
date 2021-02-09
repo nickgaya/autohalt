@@ -40,8 +40,8 @@ mkdir "${build_dir}"
 echo "Firefox"
 ff_build_dir="${build_dir}/firefox"
 rsync -R "${FF_FILES[@]}" "${ff_build_dir}"
-(cd "${ff_build_dir}" && zip "${vname}.zip" "${FF_FILES[@]}")
-mv -i "${ff_build_dir}/${vname}.zip" "artifacts/${vname}.zip"
+(cd "${ff_build_dir}" && zip "${vname}-fx.zip" "${FF_FILES[@]}")
+mv -i "${ff_build_dir}/${vname}-fx.zip" "artifacts/${vname}-fx.zip"
 
 # Chrome
 echo "Chrome"
