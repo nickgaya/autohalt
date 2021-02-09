@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 1.5.1
+- Additional YouTube selector
+
 ## Version 1.5
 - Add support for multiple YouTube interface variants
 - Add partial support for YouTube Music
