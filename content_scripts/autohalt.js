@@ -14,7 +14,14 @@ function setupAutoHalt(name, callback, options) {
         let delayed = false;
 
         function idleCallback() {
-            const result = callback();
+            let result;
+            try {
+                result = callback();
+            } catch (error) {
+                console.warn("Error in callback", error);
+                result = {};
+            }
+
             if (disconnectOnDisabled && result.disabled) {
                 console.info("Disconnecting MutationObserver");
                 observer.disconnect();
