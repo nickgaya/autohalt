@@ -1,5 +1,6 @@
 const useSettings = true;
 const idleCallbackTimeout = 1000;
+const postCallbackDelay = 250;
 const postClickDelay = 500;
 
 function setupAutoHalt(name, callback, options) {
@@ -22,14 +23,17 @@ function setupAutoHalt(name, callback, options) {
                 result = {};
             }
 
+            scheduled = false;
+
             if (disconnectOnDisabled && result.disabled) {
                 console.info("Disconnecting MutationObserver");
                 observer.disconnect();
-            } else if (result.clicked) {
-                delayed = true;
-                setTimeout(timeoutCallback, postClickDelay);
+                return;
             }
-            scheduled = false;
+
+            delayed = true;
+            setTimeout(timeoutCallback,
+                       result.clicked ? postClickDelay : postCallbackDelay);
         }
 
         function timeoutCallback() {

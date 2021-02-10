@@ -3,6 +3,7 @@
 ## Version 1.6
 - Verify element state after click, for sites with persistent toggle
 - Add logging for callback errors
+- Add delay to rate-limit callbacks
 
 ## Version 1.5.1
 - Additional YouTube selector
