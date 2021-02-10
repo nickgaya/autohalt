@@ -11,8 +11,15 @@ function setupAutoHalt(name, callback, options) {
         // back on if desired.
         const disconnectOnDisabled = !!options?.disconnectOnDisabled;
 
+        // Sometimes we need to re-check the DOM after clicking to confirm the
+        // click had the desired effect. However we don't want to get into an
+        // infinite clicking loop, so the option should specify a maximum
+        // number of consecutive times to reschedule.
+        const rescheduleAfterClick = options?.rescheduleAfterClick || 0;
+
         let scheduled = false;
         let delayed = false;
+        let rescheduled = 0;
 
         function idleCallback() {
             let result;
@@ -22,7 +29,6 @@ function setupAutoHalt(name, callback, options) {
                 console.warn("Error in callback", error);
                 result = {};
             }
-
             scheduled = false;
 
             if (disconnectOnDisabled && result.disabled) {
@@ -31,6 +37,12 @@ function setupAutoHalt(name, callback, options) {
                 return;
             }
 
+            if (result.clicked && rescheduled < rescheduleAfterClick) {
+                scheduled = true;
+                rescheduled += 1;
+            } else {
+                rescheduled = 0;
+            }
             delayed = true;
             setTimeout(timeoutCallback,
                        result.clicked ? postClickDelay : postCallbackDelay);

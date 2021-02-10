@@ -4,6 +4,7 @@
 - Verify element state after click, for sites with persistent toggle
 - Add logging for callback errors
 - Add delay to rate-limit callbacks
+- Add option to reschedule callback after click
 
 ## Version 1.5.1
 - Additional YouTube selector

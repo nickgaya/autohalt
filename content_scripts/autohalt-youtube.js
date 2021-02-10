@@ -76,7 +76,10 @@ function disableAutoplay() {
     return result;
 }
 
-setupAutoHalt('youtube', disableAutoplay, {disconnectOnDisabled: true});
+setupAutoHalt('youtube', disableAutoplay, {
+    disconnectOnDisabled: true,
+    rescheduleAfterClick: 3,
+});
 
 // Set of translations of the term "autoplay" for YouTube-supported languages
 const autoplayTranslations = new Set([
