@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 1.6
+- Verify element state after click, for sites with persistent toggle
+
 ## Version 1.5.1
 - Additional YouTube selector
 - Minor logging improvements in YouTube content script

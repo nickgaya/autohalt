@@ -8,7 +8,7 @@ function isAutoplayEnabled(autoplaySwitch) {
     // load regardless of the actual state of the switch. So in addition to
     // checking the attribute value we check for a CSS class within the
     // element's subtree to determine the true state of the toggle.
-    return (autoplaySwitch.getAttribute('aria-checked') === 'true'
+    return (autoplaySwitch.getAttribute('aria-checked') !== 'false'
             || !!autoplaySwitch.querySelector(
                 '.controls__setting-switch__open'));
 }
@@ -26,11 +26,12 @@ function disableAutoplay() {
         console.info("Clicking autoplay switch");
         autoplaySwitch.click();
         result.clicked = true;
+        result.disabled = !isAutoplayEnabled(autoplaySwitch);
+    } else {
+        result.disabled = true;
     }
 
     return result;
 }
 
-// We can stop watching the DOM once we find the switch, as the site will
-// keep track of its state.
-setupAutoHalt('hulu', disableAutoplay, {disconnectOnFound: true});
+setupAutoHalt('hulu', disableAutoplay, {disconnectOnDisabled: true});

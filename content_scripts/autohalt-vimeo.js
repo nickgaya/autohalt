@@ -16,9 +16,12 @@ function disableAutoplay() {
         console.info("Clicking autoplay toggle");
         autoplayToggle.click();
         result.clicked = true;
+        result.disabled = !autoplayToggle.checked;
+    } else {
+        result.disabled = true;
     }
 
     return result;
 }
 
-setupAutoHalt('vimeo', disableAutoplay, {disconnectOnFound: true});
+setupAutoHalt('vimeo', disableAutoplay, {disconnectOnDisabled: true});

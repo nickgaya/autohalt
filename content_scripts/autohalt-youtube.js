@@ -34,53 +34,49 @@ function findAutoplayButton() {
     elt = document.body.querySelector('ytp-autonav-toggle-button')
           || document.body.querySelector('.ytp-autonav-toggle-button');
     if (elt && elt.offsetParent) {  // Must be visible for click to work
-        return [elt, elt.getAttribute('aria-checked') === 'true',
-                'player controls'];
+        return [elt, 'aria-checked', 'player controls'];
     }
     // "Up Next" card at top of suggested videos
     elt = document.body.querySelector(
         'ytd-compact-autoplay-renderer paper-toggle-button');
     if (elt) {
-        return [elt, elt.getAttribute('aria-pressed') === 'true',
-                'Up Next card'];
+        return [elt, 'aria-pressed', 'Up Next card'];
     }
     // Toggle in player settings menu.
     elt = findAutoplayElementInSettingsMenu();
     if (elt) {
-        return [elt, elt.getAttribute('aria-checked') === 'true',
-                'player settings menu'];
+        return [elt, 'aria-checked', 'player settings menu'];
     }
     // YouTube Music - switch in queue controls
     elt = document.body.querySelector('paper-toggle-button#automix');
     if (elt) {
-        return [elt, elt.getAttribute('aria-pressed') === 'true',
-                'YouTube Music queue controls'];
+        return [elt, 'aria-pressed', 'YouTube Music queue controls'];
     }
 }
 
 function disableAutoplay() {
     const result = {found: false, clicked: false};
 
-    const [element, enabled, where] = findAutoplayButton() || [];
+    const [element, enabledAttr, where] = findAutoplayButton() || [];
     if (!element) {
         return result;
     }
     result.found = true;
 
-    if (enabled) {
+    if (element.getAttribute(enabledAttr) !== 'false') {
         console.info(`Clicking autoplay switch (${where})`);
         element.click();
         result.clicked = true;
+        // Confirm the click actually worked
+        result.disabled = (element.getAttribute(enabledAttr) === 'false');
+    } else {
+        result.disabled = true;
     }
 
     return result;
 }
 
-// YouTube remembers the user's autoplay selection as they navigate around, so
-// we can stop listening for mutation events as soon as we find up next toggle
-// (and turn it off if needed). This allows the user to manually turn it back
-// on if desired.
-setupAutoHalt('youtube', disableAutoplay, {disconnectOnFound: true});
+setupAutoHalt('youtube', disableAutoplay, {disconnectOnDisabled: true});
 
 // Set of translations of the term "autoplay" for YouTube-supported languages
 const autoplayTranslations = new Set([

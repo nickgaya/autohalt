@@ -4,14 +4,18 @@ const postClickDelay = 500;
 
 function setupAutoHalt(name, callback, options) {
     function monitorDom(callback, options) {
-        const disconnectOnFound = !!options?.disconnectOnFound;
+        // For sites that preserve the user's autoplay selection during the
+        // browsing session, we can stop watching the DOM once we confirm
+        // autoplay is switched off. This allows the user to manually turn it
+        // back on if desired.
+        const disconnectOnDisabled = !!options?.disconnectOnDisabled;
 
         let scheduled = false;
         let delayed = false;
 
         function idleCallback() {
             const result = callback();
-            if (disconnectOnFound && result.found) {
+            if (disconnectOnDisabled && result.disabled) {
                 console.info("Disconnecting MutationObserver");
                 observer.disconnect();
             } else if (result.clicked) {
