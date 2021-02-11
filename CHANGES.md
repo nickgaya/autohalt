@@ -5,6 +5,7 @@
 - Add logging for callback errors
 - Add delay to rate-limit callbacks
 - Add option to reschedule callback after click
+- Additional element visibility checks in YouTube content script
 
 ## Version 1.5.1
 - Additional YouTube selector

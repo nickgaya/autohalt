@@ -1,3 +1,7 @@
+function isVisible(element) {
+    return !!element?.offsetParent;
+}
+
 function findAutoplayElementInSettingsMenu() {
     const menuElt = document.body.querySelector('.ytp-settings-menu');
     if (!menuElt) {
@@ -5,12 +9,13 @@ function findAutoplayElementInSettingsMenu() {
     }
     // Check if the menu needs to be initialized
     if (!menuElt.querySelector('.ytp-menuitem')) {
+        const menuButton = document.body.querySelector('.ytp-settings-button');
+        if (!isVisible(menuButton)) {
+            // Menu button missing (unexpected) or not currently visible
+            return null;
+        }
         // Click the settings button to initialize the settings menu, then
         // click again to hide the menu.
-        const menuButton = document.body.querySelector('.ytp-settings-button');
-        if (!menuButton) {
-            return null;  // Couldn't find button for menu, unexpected
-        }
         console.info("Initializing player settings menu");
         menuButton.click();
         menuButton.click();
@@ -33,13 +38,13 @@ function findAutoplayButton() {
     // Switch in player bottom controls
     elt = document.body.querySelector('ytp-autonav-toggle-button')
           || document.body.querySelector('.ytp-autonav-toggle-button');
-    if (elt && elt.offsetParent) {  // Must be visible for click to work
+    if (isVisible(elt)) {
         return [elt, 'aria-checked', 'player controls'];
     }
     // "Up Next" card at top of suggested videos
     elt = document.body.querySelector(
         'ytd-compact-autoplay-renderer paper-toggle-button');
-    if (elt) {
+    if (isVisible(elt)) {
         return [elt, 'aria-pressed', 'Up Next card'];
     }
     // Toggle in player settings menu.
@@ -49,7 +54,7 @@ function findAutoplayButton() {
     }
     // YouTube Music - switch in queue controls
     elt = document.body.querySelector('paper-toggle-button#automix');
-    if (elt) {
+    if (isVisible(elt)) {
         return [elt, 'aria-pressed', 'YouTube Music queue controls'];
     }
 }
