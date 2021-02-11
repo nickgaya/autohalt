@@ -7,6 +7,7 @@
 - Add option to reschedule callback after click
 - Additional element visibility checks in YouTube content script
 - Add selector for YouTube Up Next cancel button
+- Iterate over possible YouTube Music element candidates
 
 ## Version 1.5.1
 - Additional YouTube selector

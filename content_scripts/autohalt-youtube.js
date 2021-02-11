@@ -53,9 +53,10 @@ function findAutoplayElement() {
         return [elt, 'aria-checked', 'player settings menu'];
     }
     // YouTube Music - switch in queue controls
-    elt = document.body.querySelector('paper-toggle-button#automix');
-    if (isVisible(elt)) {
-        return [elt, 'aria-pressed', 'YouTube Music queue controls'];
+    for (elt of document.body.querySelectorAll('paper-toggle-button#automix')) {
+        if (isVisible(elt)) {
+            return [elt, 'aria-pressed', 'YouTube Music queue controls'];
+        }
     }
     // Up Next cancel button
     // In the miniplayer view, there is no persistent switch to turn off
