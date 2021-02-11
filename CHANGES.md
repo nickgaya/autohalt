@@ -6,6 +6,7 @@
 - Add delay to rate-limit callbacks
 - Add option to reschedule callback after click
 - Additional element visibility checks in YouTube content script
+- Add selector for YouTube Up Next cancel button
 
 ## Version 1.5.1
 - Additional YouTube selector

@@ -33,7 +33,7 @@ function findAutoplayElementInSettingsMenu() {
     return null;
 }
 
-function findAutoplayButton() {
+function findAutoplayElement() {
     let elt;
     // Switch in player bottom controls
     elt = document.body.querySelector('ytp-autonav-toggle-button')
@@ -57,18 +57,33 @@ function findAutoplayButton() {
     if (isVisible(elt)) {
         return [elt, 'aria-pressed', 'YouTube Music queue controls'];
     }
+    // Up Next cancel button
+    // In the miniplayer view, there is no persistent switch to turn off
+    // autoplay, but when the Up Next overlay appears we can click the "cancel"
+    // button to prevent the next suggested video from starting.
+    elt = document.body.querySelector('.ytp-upnext-cancel-button');
+    if (isVisible(elt)) {
+        return [elt, null, 'Up Next cancel button'];
+    }
 }
 
 function disableAutoplay() {
     const result = {found: false, clicked: false};
 
-    const [element, enabledAttr, where] = findAutoplayButton() || [];
+    const [element, enabledAttr, where] = findAutoplayElement() || [];
     if (!element) {
         return result;
     }
     result.found = true;
 
-    if (element.getAttribute(enabledAttr) !== 'false') {
+    if (!enabledAttr) {
+        console.info(`Clicking autoplay button (${where})`);
+        element.click();
+        result.clicked = true;
+        // Clicking "button"-type elements does not persistently disable
+        // autoplay so we need to keep watching the DOM.
+        result.disabled = false;
+    } else if (element.getAttribute(enabledAttr) !== 'false') {
         console.info(`Clicking autoplay switch (${where})`);
         element.click();
         result.clicked = true;
