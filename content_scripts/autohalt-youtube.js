@@ -53,7 +53,7 @@ function findAutoplayElement() {
         return [elt, 'aria-checked', 'player settings menu'];
     }
     // YouTube Music - switch in queue controls
-    for (elt of document.body.querySelectorAll('paper-toggle-button#automix')) {
+    for (elt of document.body.querySelectorAll('#automix[role="button"]')) {
         if (isVisible(elt)) {
             return [elt, 'aria-pressed', 'YouTube Music queue controls'];
         }

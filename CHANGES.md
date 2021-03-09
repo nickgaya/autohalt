@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 1.6.1
+- Update YouTube Music element selector
+
 ## Version 1.6
 - Verify element state after click, for sites with persistent toggle
 - Add logging for callback errors
